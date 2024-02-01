@@ -41,11 +41,13 @@ function displayAllProduct(): string
         $display .= "<td><p>Commentaire</p></td>";
         $display .= "<td><p>Étoile</p></td>";
         $display .= "<td>
-                        <input type='hidden' name='id' value='$key->id'>
-                        <input type='hidden' name='prix' value='$key->prix'>
-                        <input type='hidden' name='quantite' value='1'>
-                        <input type='hidden' name='nom' value='$key->nom'>
-                        <button type='submit' class='btn btn-primary btn-sm' name='ajouter_au_panier'>Ajouter au panier</button>
+                        <form action='index.php' method='POST'>
+                            <input type='hidden' name='id' value='$key->id'>
+                            <input type='hidden' name='prix' value='$key->prix'>
+                            <input type='hidden' name='quantite' value='1'>
+                            <input type='hidden' name='nom' value='$key->nom'>
+                            <button type='submit' class='btn btn-primary btn-sm''>Ajouter au panier</button>
+                        </form>
                     </td>";
         $display .= "</tr>";
     }
@@ -58,7 +60,7 @@ function displayAllProduct(): string
     return $display;
 }
 
-if ($user && isset($iduser) && isset($_POST['ajouter_au_panier'])) {
+if ($user && isset($iduser) && !empty($_POST['id'])) {
     $idd = $_POST['id'] ?? '';
     $nom = $_POST['nom'] ?? '';
     $prix = $_POST['prix'] ?? '';
