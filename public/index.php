@@ -30,13 +30,6 @@ require_once __DIR__ . '/../src/utils/displayProduct.php';
          <div class ="row">
              <div class="col">
                  <?php echo displayAllProduct(); 
-                 try {
-                     if (isset($_POST['email'], $_POST['pseudo'], $_POST['passwrd'], $_POST['passwordConfirm'], $iduser)) {
-                        addAtTheCart($idd, $nom, $prix, $quantity, $iduser);
-                     }
-                 } catch (Exception $e) {
-                     echo $e->getMessage();
-                 }
                  ?>
                
             </div>
