@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/../src/init.php';
 require_once __DIR__ . '/../src/utils/displayProduct.php';
-require_once __DIR__ . '/../src/utils/paner.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +20,7 @@ require_once __DIR__ . '/../src/utils/paner.php';
                 <h1>Bonjour</h1>
                 <div class="alert alert-success">
                     Bienvenue sur la boutique, mon chère  <?php if ($user != false) {
-            echo $user->id;
+            echo $user->prenom;
         };?>
                 </div>
             </div>
@@ -33,7 +32,7 @@ require_once __DIR__ . '/../src/utils/paner.php';
                  <?php echo displayAllProduct(); 
                  try {
                      if (isset($_POST['email'], $_POST['pseudo'], $_POST['passwrd'], $_POST['passwordConfirm'], $iduser)) {
-                        addAtThePaner($idd, $nom, $prix, $quantity, $iduser);
+                        addAtTheCart($idd, $nom, $prix, $quantity, $iduser);
                      }
                  } catch (Exception $e) {
                      echo $e->getMessage();

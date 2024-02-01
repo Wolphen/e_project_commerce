@@ -1,14 +1,25 @@
 <?php
 require_once __DIR__ . '/../init.php';
-require_once __DIR__ . '/paner.php';
 $iduser = 0;
 if ($user != false) {
     $iduser = $user->id;
 }
 
+function addAtTheCart(int $idd, string $nom, float $prix, int $quantity, $iduser){
+   
+    $pdo = requeteConnexion();
+    $pdoStatement = $pdo->prepare("INSERT INTO panier (nomProduit, acheteur, price, idProduit, quantiterProduit)
+    VALUES (:nomProduit, :acheteur, :price, :idProduit, :quantiterProduit)");
+    $pdoStatement->execute(["nomProduit"=> $nom, ":acheteur"=> $iduser, "price"=> $prix, "idProduit" => $idd, ":quantiterProduit"=>$quantity]);
+    $result = $pdoStatement->fetch();
+    var_dump($result); 
+}
 
 function displayAllProduct(): string
 {
+    global $iduser;
+    global $user;
+
     $pdo = requeteConnexion();
     $pdoStatement = $pdo->prepare("SELECT * 
     FROM produit 
@@ -58,8 +69,8 @@ foreach ($result as $key) {
                     $prix = $_POST['prix'] ?? '';
                     $quantity = $_POST['quantite'] ?? '';
                     try {
-                        if (isset($_POST['email'], $_POST['pseudo'], $_POST['passwrd'], $_POST['passwordConfirm'], $iduser)) {
-                            addAtThePaner($idd, $nom, $prix, $quantity, $iduser);
+                        if ($user && isset($iduser) && isset($_POST['ajouter_au_panier'])) {
+                            addAtTheCart($idd, $nom, $prix, $quantity, $iduser);
                         }
                     } catch (Exception $e) {
                         echo $e->getMessage();
