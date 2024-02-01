@@ -27,22 +27,8 @@ function displayAllProduct(): string
     $pdoStatement->execute();
     $result = $pdoStatement->fetchALL();
   
-    $display = "<div class='container mt-4'>";
-$display .= "<form method='post'>";
-$display .= "<table class='table table-bordered'>";
-$display .= "<thead class='thead-dark'>";
-$display .= "<tr>";
-$display .= "<th scope='col'>Image</th>";
-$display .= "<th scope='col'>Nom</th>";
-$display .= "<th scope='col'>Description</th>";
-$display .= "<th scope='col'>Prix</th>";
-$display .= "<th scope='col'>Commentaire</th>";
-$display .= "<th scope='col' style='width: 50px;'>Étoile</th>";
-$display .= "<th scope='col' style='width: 80px;'>Action</th>";
-$display .= "</tr>";
-$display .= "</thead>";
-$display .= "<tbody>";
 
+$display = "";
 foreach ($result as $key) {
     $display .= "<tr>";
     $display .= "<td style='width: 100px; height: 100px; overflow: hidden;'><img src='$key->img' style='width: 100%; object-fit: cover;' class='img-fluid'></td>";
@@ -84,4 +70,30 @@ $display .= "</div>";
 
 return $display;
 }
+?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class='container mt-4'>
+    <form method='post'>
+    <table class='table table-bordered'>
+    <thead class='thead-dark'>
+    <tr>
+    <th scope='col'>Image</th>
+    <th scope='col'>Nom</th>
+    <th scope='col'>Description</th>
+    <th scope='col'>Prix</th>
+    <th scope='col'>Commentaire</th>
+    <th scope='col' style='width: 50px;'>Étoile</th>
+    <th scope='col' style='width: 80px;'>Action</th>
+    </tr>
+</thead>
+<tbody>
+</body>
+</html>
