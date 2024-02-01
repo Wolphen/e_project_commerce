@@ -8,15 +8,35 @@ if ($user != false) {
 function addToTheCart(int $idd, string $nom, float $prix, int $quantity, $iduser)
 {
     $pdo = requeteConnexion();
-    $pdoStatement = $pdo->prepare("INSERT INTO panier (nomProduit, acheteur, price, idProduit, quantiterProduit)
-    VALUES (:nomProduit, :acheteur, :price, :idProduit, :quantiterProduit)");
-    $pdoStatement->execute([
-        ":nomProduit" => $nom,
-        ":acheteur" => $iduser,
-        ":price" => $prix,
+
+    $existingProduct = $pdo->prepare("SELECT idProduit, quantiterProduit FROM panier WHERE idProduit = :idProduit AND acheteur = :acheteur");
+    $existingProduct->execute([
         ":idProduit" => $idd,
-        ":quantiterProduit" => $quantity
+        ":acheteur" => $iduser
     ]);
+
+    if ($existingProduct->rowCount() > 0) {
+        $row = $existingProduct->fetch(PDO::FETCH_ASSOC); 
+        $newQuantity = $row['quantiterProduit'] + 1;
+
+        $updateQuantity = $pdo->prepare("UPDATE panier SET quantiterProduit = :quantiterProduit WHERE idProduit = :idProduit AND acheteur = :acheteur");
+        $updateQuantity->execute([
+            ":idProduit" => $idd,
+            ":acheteur" => $iduser,
+            ":quantiterProduit" => $newQuantity
+        ]);
+
+    } else {
+        $pdoStatement = $pdo->prepare("INSERT INTO panier (nomProduit, acheteur, price, idProduit, quantiterProduit)
+        VALUES (:nomProduit, :acheteur, :price, :idProduit, :quantiterProduit)");
+        $pdoStatement->execute([
+            ":nomProduit" => $nom,
+            ":acheteur" => $iduser,
+            ":price" => $prix,
+            ":idProduit" => $idd,
+            ":quantiterProduit" => $quantity
+        ]);
+    }
 }
 
 function displayAllProduct(): string

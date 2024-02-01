@@ -8,7 +8,7 @@ function displayCart(): string
         $idUtilisateur = $user->id; 
         $pdo = requeteConnexion();
 
-        $pdoStatement = $pdo->prepare("SELECT p.img, p.nom, p.detail, p.prix
+        $pdoStatement = $pdo->prepare("SELECT p.img, p.nom, p.detail, p.prix, pa.quantiterProduit
                                         FROM produit p
                                         JOIN panier pa ON p.id = pa.idProduit
                                         WHERE pa.acheteur = :idUtilisateur
@@ -25,6 +25,7 @@ function displayCart(): string
             $display .= "<td style='width: 150px;'><p>$key->nom</p></td>";
             $display .= "<td><p>$key->detail</p></td>";  
             $display .= "<td>$key->prix</td>";
+            $display .= "<td>$key->quantiterProduit</td>";
             $display .= "</tr>";
         }
 
@@ -80,6 +81,7 @@ function displayCart(): string
                         <th scope='col'>Nom</th>
                         <th scope='col'>Description</th>
                         <th scope='col'>Prix</th>
+                        <th scope='col'>Quantite</th>
                         <?php echo displayCart(); ?>
                     </tr>
                 </thead>
