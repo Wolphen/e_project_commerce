@@ -25,6 +25,7 @@
         <li>
             <a href="/addProduct.php">Ajouter un produit</a>
         </li>
+        
         <?php } ?>
     <li>
         <a href="/actions/logout.php">Log OUT</a>

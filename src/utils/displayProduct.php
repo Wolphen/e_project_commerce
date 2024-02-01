@@ -19,6 +19,8 @@ function addToTheCart(int $idd, string $nom, float $prix, int $quantity, $iduser
     ]);
 }
 
+
+
 function displayAllProduct(): string
 {
     global $iduser;
@@ -71,7 +73,13 @@ if ($user && isset($iduser) && !empty($_POST['id'])) {
     } catch (Exception $e) {
         echo $e->getMessage();
     }
+
+    
 }
+
+
+    
+
 
 ?>
 
