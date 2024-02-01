@@ -29,5 +29,8 @@
     <li>
         <a href="/actions/logout.php">Log OUT</a>
     </li>
+    <li>
+        <a href="/cart.php"> Voir le panier</a>
+    </li>
     <?php } ?>
 </ul>
