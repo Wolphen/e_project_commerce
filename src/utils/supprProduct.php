@@ -1,5 +1,5 @@
 <?php 
-
+/* permet à l'admin de délète des produits */
 function displayAllProductToDelete(): string
 {
     global $iduser;

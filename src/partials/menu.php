@@ -3,6 +3,7 @@
         <a href="/">Home</a>
     </li>
     <?php
+    /* si le user pas co il peut log ou sign in */
     if ($user === false) { ?>
     <li>
         <a href="/register.php">Register</a>
@@ -11,7 +12,7 @@
         <a href="/login.php">Login</a>
     </li>
     <?php } else { ?>
-        <li>
+        <li><!-- si le user est set son pseudo s'affiche  il peut log ou voir le panier et ses commandes passées-->
         <?php if ($user != false) {
             echo $user->prenom;
         }
@@ -20,7 +21,7 @@
         }?>
         </li>
         
-        <?php
+        <?php /* si le user est admin il peut acceder à ajouter un produit */
         if ($user->isAdmin == 1){ ?>
         <li>
             <a href="/addProduct.php">Ajouter un produit</a>

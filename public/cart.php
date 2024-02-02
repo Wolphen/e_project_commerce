@@ -43,11 +43,11 @@ function displayCart(): string
 
         $display .= "</tbody>";
         $display .= "</table>";
-        $display .= "<input type='text' name='adresse' placeholder='Entrez votre adresse de livraison' required>";
+        $display .= "<input type='text' name='adresse' placeholder='Entrez votre adresse de livraison' required>"; /* ont met l'adresse de livraison obligatoire */
         $display .= "<input type='hidden' name='id' value='$key->idProduit'>";
         $display .= "<input type='hidden' name='nom' value='$key->nom'>";
         $display .= "<input type='hidden' name='quantite' value='$key->quantiterProduit'>";
-        $display .= "<button type='submit' class='btn btn-primary' name='commanderTout'>Commander Tout le Panier</button>";
+        $display .= "<button type='submit' class='btn btn-primary' name='commanderTout'>Commander Tout le Panier</button>"; /* on setup ici le bouton pour commander */
         $display .= "</form>";
         $display .= "</div>";
     } else {

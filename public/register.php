@@ -34,6 +34,7 @@ require_once __DIR__ . '/../src/utils/register_connexion.php'
             </label>
 
             <?php
+            /* recuperer les inputs pour les mettre en param */
                 $email = $_POST['email'] ?? '';
                 $pseudo = $_POST['pseudo'] ?? '';
                 $passwrd = $_POST['passwrd'] ?? '';

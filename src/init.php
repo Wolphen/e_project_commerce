@@ -7,7 +7,9 @@ require_once __DIR__ . '/db.php';
 // require des utilitaires *utils*
 
 // require les classes
+  
 
+/* permet de set up la session dans la variable $user */
 $user = false;
 if (isset($_SESSION['user_id'])) {
     $pdo = requeteConnexion();

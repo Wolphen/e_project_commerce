@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/../src/init.php';
-
+if ($user = false){
+    header('Location: index.php');
+}
+/* fonction qui affiche toutes les commandes */
 function displayOrders(): string
 {
     global $user;
@@ -60,11 +63,7 @@ function displayOrders(): string
         <div class="row">
             <div class="col">
                 <h1>Mes Commandes</h1>
-                <?= displayOrders() ?>
-
-                <?php if ($user !== false) : ?>
-                    <a href="commentaire.php" class="btn btn-primary">Laisser un commentaire</a>
-                <?php endif; ?>
+                <?= displayOrders() ?> <!-- Pour afficher toutes les commandes -->
             </div>
         </div>
     </div>

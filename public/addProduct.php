@@ -5,6 +5,12 @@ require_once __DIR__ . '/../src/partials/show_error.php';
 require_once __DIR__ . '/../src/utils/createProduct.php';
 require_once __DIR__ . '/../src/utils/supprProduct.php';
 require_once __DIR__ . '/../src/partials/head_css.php';
+/* fonction repeter pour catch si le user est co ou pas */
+if ($user !== false) {
+    $idUtilisateur = $user->id; 
+} else {
+    header('Location: index.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +39,7 @@ require_once __DIR__ . '/../src/partials/head_css.php';
             <br>
             <input type="submit">
             <?php 
+            /* Sert à stocker les inputs dans des variable pour les réutiliser après dans une fonction en tant que param */
             $nomProduit = $_POST['nomProduit'] ?? '';
             $prix = $_POST['prix'] ?? '';
             $description = $_POST['description'] ?? '';
@@ -42,7 +49,7 @@ require_once __DIR__ . '/../src/partials/head_css.php';
                 if (isset($_POST['nomProduit'], $_POST['prix'], $_POST['description'], $_POST['quantite'], $_POST['urlImage'])) {
                     addProduct($nomProduit, $prix, $description, $quantite, $urlImage);
                     echo "Ajout réussi !";
-                }
+                } /* catch erreur */
             } catch (Exception $e) {
                 echo $e->getMessage();
             }
@@ -63,7 +70,7 @@ require_once __DIR__ . '/../src/partials/head_css.php';
     <div class="container">
          <div class ="row">
              <div class="col">
-                 <?php echo displayAllProductToDelete(); 
+                 <?php echo displayAllProductToDelete(); /* affiche to les produits qu l'admin peut delete */
                  ?>
                
             </div>
