@@ -1,13 +1,17 @@
 <?php
 require_once __DIR__ . '/../../src/init.php';
-
+if ($user !== false) {
+    $idUtilisateur = $user->id; 
+} else {
+    header('Location: index.php');
+}
+/* commande pour stocker et ensuite insert dans la table commande passer en deletant le panier */
 $idd = $_POST['id'] ?? '';
 $nom = $_POST['nom'] ?? '';
 $prix = $_POST['prix'] ?? '';
 $quantity = $_POST['quantite'] ?? ''; 
 $adresseLivraison = $_POST['adresse'];
 
-$idUtilisateur = $user->id;
 
 $pdo = requeteConnexion();
 $pdoStatement = $pdo->prepare("INSERT INTO listcommandes (acheteur, produits, quantiterProduit, adress)

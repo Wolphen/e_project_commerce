@@ -4,7 +4,7 @@ $iduser = 0;
 if ($user != false) {
     $iduser = $user->id;
 }
-
+/* ajoute dans le panier un produit et check si il y est déjà, si c'est le cas sa add +1 au count */
 function addToTheCart(int $idd, string $nom, float $prix, int $quantity, $iduser)
 {
     $pdo = requeteConnexion();
@@ -15,7 +15,7 @@ function addToTheCart(int $idd, string $nom, float $prix, int $quantity, $iduser
         ":acheteur" => $iduser
     ]);
 
-    if ($existingProduct->rowCount() > 0) {
+    if ($existingProduct->rowCount() > 0) {/* fonction de count */
         $row = $existingProduct->fetch(PDO::FETCH_ASSOC); 
         $newQuantity = $row['quantiterProduit'] + 1;
 
@@ -26,7 +26,7 @@ function addToTheCart(int $idd, string $nom, float $prix, int $quantity, $iduser
             ":quantiterProduit" => $newQuantity
         ]);
 
-    } else {
+    } else { /* insert si pas de doublon */
         $pdoStatement = $pdo->prepare("INSERT INTO panier (nomProduit, acheteur, price, idProduit, quantiterProduit)
         VALUES (:nomProduit, :acheteur, :price, :idProduit, :quantiterProduit)");
         $pdoStatement->execute([
@@ -40,11 +40,9 @@ function addToTheCart(int $idd, string $nom, float $prix, int $quantity, $iduser
 }
 
 
-
+/* display tout les produist dans la base de donnée sous form d'un tableau agancé */
 function displayAllProduct(): string
 {
-    global $iduser;
-    global $user;
 
     $pdo = requeteConnexion();
     $pdoStatement = $pdo->prepare("SELECT * 
@@ -82,7 +80,7 @@ function displayAllProduct(): string
     return $display;
 }
 
-if ($user && isset($iduser) && !empty($_POST['id'])) {
+if ($user && isset($iduser) && !empty($_POST['id'])) { /* vérifie les id de chaque tableau pour les dicerner  */
     $idd = $_POST['id'] ?? '';
     $nom = $_POST['nom'] ?? '';
     $prix = $_POST['prix'] ?? '';

@@ -1,4 +1,6 @@
 <?php
+
+/* crée un produit dans la dtb  */
 function addProduct(string $nomProduit, float $prix, string $description, int $quantite, string $urlImage) : void {
     $pdo = requeteConnexion();
     $pdoStatement = $pdo->prepare("INSERT INTO produit (nom, detail, prix, quantite, commentaire, img, etoile)
