@@ -22,7 +22,7 @@ require_once __DIR__ . '/../src/utils/register_connexion.php'
 
             <br>
             <label for="password" class="labell"></label>
-            <input type="text" id="password" name="passwrd" placeholder="Mot de passe" required class="inputl" onkeyup="passwordCheck()">
+            <input type="text" id="password" name="passwrd" placeholder="Mot de passe" required class="inputl">
 
             <br>
             <label for="password" class="labell"></label>
@@ -39,7 +39,7 @@ require_once __DIR__ . '/../src/utils/register_connexion.php'
                 $passwrd = $_POST['passwrd'] ?? '';
                 $passwordConfirm = $_POST['passwordConfirm'] ?? '';
                 try {
-                    if (isset($_POST['email'], $_POST['pseudo'], $_POST['passwrd'], $_POST['passwordConfirm'])) {
+                    if (isset($_POST['email'], $_POST['pseudo'], $_POST['passwrd'], $_POST['passwordConfirm'],)) {
                         subscribeFormUser($email, $pseudo, $passwrd, $passwordConfirm);
                         echo "<script type='text/javascript'>document.location.replace('login.php');</script>";
                     }
