@@ -8,7 +8,7 @@ function displayCart(): string
         $idUtilisateur = $user->id; 
         $pdo = requeteConnexion();
 
-        $pdoStatement = $pdo->prepare("SELECT p.img, p.nom, p.detail, p.prix, pa.quantiterProduit
+        $pdoStatement = $pdo->prepare("SELECT *
                                         FROM produit p
                                         JOIN panier pa ON p.id = pa.idProduit
                                         WHERE pa.acheteur = :idUtilisateur
@@ -18,27 +18,36 @@ function displayCart(): string
         $pdoStatement->execute();
         $result = $pdoStatement->fetchAll();
 
-        $display = "";
+        $display = "<form method='POST' action='actions/order.php'>";
+        $display .= "<table class='table table-bordered'>";
+        $display .= "<thead class='thead-dark'>";
+        $display .= "<tr>";
+        $display .= "<th scope='col'>Image</th>";
+        $display .= "<th scope='col'>Nom</th>";
+        $display .= "<th scope='col'>Description</th>";
+        $display .= "<th scope='col'>Prix</th>";
+        $display .= "<th scope='col'>Quantite</th>";
+        $display .= "</tr>";
+        $display .= "</thead>";
+        $display .= "<tbody>";
+
         foreach ($result as $key) {
             $display .= "<tr>";
             $display .= "<td style='width: 100px; height: 100px; overflow: hidden;'><img src='$key->img' style='width: 100%; object-fit: cover;' class='img-fluid'></td>";
             $display .= "<td style='width: 150px;'><p>$key->nom</p></td>";
             $display .= "<td><p>$key->detail</p></td>";  
             $display .= "<td>$key->prix</td>";
-            $display .= "<td>$key->quantiterProduit</td>
-                    <input type='hidden' name='prix' value='$key->prix'>
-                    <input type='hidden' name='quantite' value='1'>
-                    <input type='hidden' name='nom' value='$key->nom'>";
-            
+            $display .= "<td>$key->quantiterProduit</td>";
             $display .= "</tr>";
         }
-        $display .= "<button type='submit' class='btn btn-primary btn-sm''>Ajouter au panier</button>";
-        $display .= "</form>";
+
+        $display .= "</tbody>";
         $display .= "</table>";
-        $display .= "                <label>Livraison uniquement en île-de-france</label>
-                                     <label>Vérifier bien votre adresse car vous n'aurez le droit qu'à une chance, ou alors vous devrez nous contacter si vous vous tromper à l'adresse
-                                     quoicoupagnant@esiee-grayeit.true.</label>
-        <input type='text' name='adress' id='adress' placeholder='Numéro de rue, nom de la rue, département, code postale' style='width: 500px;'>";
+        $display .= "<input type='text' name='adresse' placeholder='Entrez votre adresse de livraison' required>";
+        $display .= "<input type='hidden' name='id' value='$key->idProduit'>";
+        $display .= "<input type='hidden' name='nom' value='$key->nom'>";
+        $display .= "<input type='hidden' name='quantite' value='$key->quantiterProduit'>";
+        $display .= "<button type='submit' class='btn btn-primary' name='commanderTout'>Commander Tout le Panier</button>";
         $display .= "</form>";
         $display .= "</div>";
     } else {
@@ -47,7 +56,6 @@ function displayCart(): string
 
     return $display;
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -82,22 +90,8 @@ function displayCart(): string
     </div>
 
     <div class='container mt-4'>
-        <form method ='POST' action='cart.php'>
-            <table class='table table-bordered'> 
-                <thead class='thead-dark'>
-                        <button href="/actions/requestCommand.php">Supprimer les articles du panier</button>
-                        <button href="/public/actions/requestCommand.php">Passer la commande</button>
-                    <tr>
-                        <th scope='col'>Image</th>
-                        <th scope='col'>Nom</th>
-                        <th scope='col'>Description</th>
-                        <th scope='col'>Prix</th>
-                        <th scope='col'>Quantite</th>
-                        <?php echo displayCart(); ?>
-                    </tr>
-                </thead>
-            </table>
-        </form>
+        <?php 
+        echo displayCart(); ?>
     </div>
 </body>
 </html>
