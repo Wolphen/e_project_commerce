@@ -61,6 +61,10 @@ function displayOrders(): string
             <div class="col">
                 <h1>Mes Commandes</h1>
                 <?= displayOrders() ?>
+
+                <?php if ($user !== false) : ?>
+                    <a href="commentaire.php" class="btn btn-primary">Laisser un commentaire</a>
+                <?php endif; ?>
             </div>
         </div>
     </div>
