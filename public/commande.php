@@ -26,15 +26,9 @@ function displayCart(): string
             $display .= "<td><p>$key->detail</p></td>";  
             $display .= "<td>$key->prix</td>";
             $display .= "<td>$key->quantiterProduit</td>";
-            $display .= "<form action='cart.php' method='POST'>
-                            <input type='hidden' name='id' value='$key->id'>
-                            <input type='hidden' name='prix' value='$key->prix'>
-                            <input type='hidden' name='quantite' value='$key->quantiterProduit'>
-                            <input type='hidden' name='nom' value='$key->nom'>";
             $display .= "</tr>";
         }
-        $display .= "<button type='submit' class='btn btn-primary btn-sm''>Ajouter au panier</button>";
-        $display .= "</form>";
+
         $display .= "</table>";
         $display .= "</form>";
         $display .= "</div>";
@@ -64,9 +58,7 @@ function displayCart(): string
             <div class="col">
                 <h1>Bonjour</h1>
                 <div class="alert alert-success">
-                    Voici votre panier  <?php if ($user != false) {
-            echo $user->prenom;
-        };?>
+                    Commandes
                 </div>
             </div>
         </div>

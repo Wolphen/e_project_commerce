@@ -21,7 +21,11 @@ require_once __DIR__ . '/../src/utils/displayProduct.php';
                 <div class="alert alert-success">
                     Bienvenue sur la boutique, mon chère  <?php if ($user != false) {
             echo $user->prenom;
-        };?>
+            } else {
+                echo 'paco';
+            }
+            
+            ?>
                 </div>
             </div>
         </div>
