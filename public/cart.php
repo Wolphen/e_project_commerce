@@ -25,17 +25,20 @@ function displayCart(): string
             $display .= "<td style='width: 150px;'><p>$key->nom</p></td>";
             $display .= "<td><p>$key->detail</p></td>";  
             $display .= "<td>$key->prix</td>";
-            $display .= "<td>$key->quantiterProduit</td>";
-            $display .= "<form action='cart.php' method='POST'>
-                            <input type='hidden' name='id' value='$key->id'>
-                            <input type='hidden' name='prix' value='$key->prix'>
-                            <input type='hidden' name='quantite' value='$key->quantiterProduit'>
-                            <input type='hidden' name='nom' value='$key->nom'>";
+            $display .= "<td>$key->quantiterProduit</td>
+                    <input type='hidden' name='prix' value='$key->prix'>
+                    <input type='hidden' name='quantite' value='1'>
+                    <input type='hidden' name='nom' value='$key->nom'>";
+            
             $display .= "</tr>";
         }
         $display .= "<button type='submit' class='btn btn-primary btn-sm''>Ajouter au panier</button>";
         $display .= "</form>";
         $display .= "</table>";
+        $display .= "                <label>Livraison uniquement en île-de-france</label>
+                                     <label>Vérifier bien votre adresse car vous n'aurez le droit qu'à une chance, ou alors vous devrez nous contacter si vous vous tromper à l'adresse
+                                     quoicoupagnant@esiee-grayeit.true.</label>
+        <input type='text' name='adress' id='adress' placeholder='Numéro de rue, nom de la rue, département, code postale' style='width: 500px;'>";
         $display .= "</form>";
         $display .= "</div>";
     } else {
@@ -82,6 +85,8 @@ function displayCart(): string
         <form method ='POST' action='cart.php'>
             <table class='table table-bordered'> 
                 <thead class='thead-dark'>
+                        <button href="/actions/requestCommand.php">Supprimer les articles du panier</button>
+                        <button href="/public/actions/requestCommand.php">Passer la commande</button>
                     <tr>
                         <th scope='col'>Image</th>
                         <th scope='col'>Nom</th>
