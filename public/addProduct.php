@@ -4,7 +4,8 @@ require_once __DIR__ . '/../src/partials/menu.php';
 require_once __DIR__ . '/../src/partials/show_error.php';
 require_once __DIR__ . '/../src/utils/createProduct.php';
 require_once __DIR__ . '/../src/utils/supprProduct.php';
-require_once __DIR__ . '/../src/partials/head_css.php'
+require_once __DIR__ . '/../src/partials/head_css.php';
+require_once __DIR__ . '/../src/utils/requestCommand.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +51,7 @@ require_once __DIR__ . '/../src/partials/head_css.php'
             <div class="col">
                 <h1>Bonjour</h1>
                 <div class="alert alert-success">
-                    Bienvenue sur la boutique, mon chère  <?php if ($user != false) {
+                    Bienvenue dans ton panier ou tu peut tout supprimer ou ajouter  <?php if ($user != false) {
             echo $user->prenom;
         };?>
                 </div>
@@ -62,10 +63,9 @@ require_once __DIR__ . '/../src/partials/head_css.php'
              <div class="col">
                  <?php echo displayAllProductToDelete(); 
                  ?>
-
+               
             </div>
         </div>
-    </div> 
     </div>
 </body>
 </html>

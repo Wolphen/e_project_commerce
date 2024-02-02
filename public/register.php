@@ -22,7 +22,7 @@ require_once __DIR__ . '/../src/utils/register_connexion.php'
 
             <br>
             <label for="password" class="labell"></label>
-            <input type="text" id="password" name="passwrd" placeholder="Mot de passe" required class="inputl" onkeyup="passwordCheck()">
+            <input type="text" id="password" name="passwrd" placeholder="Mot de passe" required class="inputl">
 
             <br>
             <label for="password" class="labell"></label>

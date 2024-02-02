@@ -33,5 +33,8 @@
     <li>
         <a href="/cart.php"> Voir le panier</a>
     </li>
+    <li>
+        <a href="/doneCommand.php"> Voir les commandes passées</a>
+    </li>
     <?php } ?>
 </ul>
